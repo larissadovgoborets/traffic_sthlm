@@ -162,5 +162,7 @@ cython_debug/
 #.idea/
 
 
-#snowflake user credential files
+# snowflake user credential files
+create_user.sql
 setup_users.sql
+secrets.toml

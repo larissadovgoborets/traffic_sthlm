@@ -1,7 +1,6 @@
 import dlt
 import json
 import requests
-import pandas as pd
 from pathlib import Path
 import os
 from eda_functions import xml_query

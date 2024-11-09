@@ -23,8 +23,8 @@ def run_pipeline(table_name="sl_announcements"):
     pipeline = dlt.pipeline(
         pipeline_name="extract_from_sl_pipeline", 
         destination='snowflake', 
-        dataset_name="sl_announcements"
-    )
+        dataset_name="staging")
+    
     # Extract, normalize, and load the data
     load_info = pipeline.run(sl_announcements_resource(), table_name=table_name)
     print(load_info)  # noqa: T201

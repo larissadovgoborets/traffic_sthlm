@@ -333,3 +333,4 @@ cython_debug/
 create_user.sql
 setup_users.sql
 secrets.toml
+testing.sql

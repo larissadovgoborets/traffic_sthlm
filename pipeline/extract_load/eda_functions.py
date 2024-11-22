@@ -31,8 +31,10 @@ def xml_query(API_key, filter, object_type, limit = None):
     else:
       query = f'''<QUERY objecttype="{object_type}" schemaversion="{object_types[object_type]}">'''
 
-    if object_type in ['Situation', 'TrafficFlow', 'TrainMessage']: # object types that can filter on CountyNo
+    if object_type in ['TrafficFlow', 'TrainMessage']: # object types that can filter on CountyNo
         filter += f'''<EQ name = "CountyNo" value = "1"/>''' # CountyNo for Stockholm
+    if object_type == 'Situation':
+        filter += f'''<EQ name = "Deviation.CountyNo" value = "1"/>'''
     
     xml_data = f'''<?xml version="1.0" encoding="UTF-8"?>
       <REQUEST>

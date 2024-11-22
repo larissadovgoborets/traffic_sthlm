@@ -1,6 +1,5 @@
 import dlt
 from dlt.sources.helpers import requests
-import json
 import os
 from pathlib import Path
 
@@ -27,23 +26,7 @@ def run_pipeline(table_name="sl_announcements"):
     
     # Extract, normalize, and load the data
     load_info = pipeline.run(sl_announcements_resource(), table_name=table_name)
-    print(load_info)  # noqa: T201
-
-""" Leave example code for now, will be removed in the future 
-@dlt.resource(write_disposition="replace")
-def github_api_resource(api_secret_key: Optional[str] = dlt.secrets.value):
-    from dlt.sources.helpers.rest_client import paginate
-    from dlt.sources.helpers.rest_client.auth import BearerTokenAuth
-    from dlt.sources.helpers.rest_client.paginators import HeaderLinkPaginator
-
-    url = "https://api.github.com/repos/dlt-hub/dlt/issues"
-    # Github allows both authenticated and non-authenticated requests (with low rate limits)
-    auth = BearerTokenAuth(api_secret_key) if api_secret_key else None
-    for page in paginate(
-        url, auth=auth, paginator=HeaderLinkPaginator(), params={"state": "open", "per_page": "100"}
-    ):
-        yield page
-"""
+    print(load_info)  
 
 if __name__ == "__main__":
     working_directory = Path(__file__).parent

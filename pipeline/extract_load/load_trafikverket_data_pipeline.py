@@ -1,7 +1,6 @@
 import dlt
 import json
 import requests
-import pandas as pd
 from pathlib import Path
 import os
 from eda_functions import xml_query
@@ -15,14 +14,14 @@ def _get_traffic_data():
     }
     API_key = os.getenv('API_KEY')
     filter = """<EQ name = "Deleted" value = "false"/>"""
-    xml_data = xml_query(API_key=API_key,filter=filter,object_type='TrainAnnouncement')
+    xml_data = xml_query(API_key=API_key,filter=filter,object_type='Situation')
     response = requests.post(url=url, data=xml_data, headers=headers)
     response.raise_for_status()  # check for http errors
     return json.loads(response.content.decode('utf8'))
 
 @dlt.resource(write_disposition="replace")
 def traffic_data_resource():
-    response = _get_traffic_data()['RESPONSE']['RESULT'][0]['TrainAnnouncement']
+    response = _get_traffic_data()['RESPONSE']['RESULT'][0]['Situation']
     for data in response:
         yield data
 
@@ -47,10 +46,10 @@ def run_pipeline(table_name):
 if __name__ == "__main__":
     # specify the pipeline name, destination and dataset name when configuring pipeline,
     # otherwise the defaults will be used that are derived from the current script name
-    # data science, data engineer, data analyst
     working_directory = Path(__file__).parent
     os.chdir(working_directory)
-    table_name = "data_sthlm_traffic2"
+    table_name = "Situation"
     run_pipeline(table_name)
+    
 
 

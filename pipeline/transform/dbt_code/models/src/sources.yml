@@ -1,0 +1,12 @@
+sources:
+    - name: traffic_data_sthlm_db
+      schema: staging
+      tables: 
+        - name: stg_trafikverket_traffic_messages
+          identifier: situation
+        - name: stg_trafikverket_deviation
+          identifier: situation__deviation
+        - name: stg_trafikverket_county_no
+          identifier: situation__deviation__county_no
+        - name: stg_trafikverket_deviation_schedule
+          identifier: situation__deviation__schedule

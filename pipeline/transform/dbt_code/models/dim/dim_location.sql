@@ -1,4 +1,4 @@
-WITH src_dim_location AS (SELECT * FROM {{ ref('src_dim_location') }})
+WITH src_dim_location AS (SELECT * FROM {{ ref('src_location') }})
 
 
 SELECT

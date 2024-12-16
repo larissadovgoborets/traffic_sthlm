@@ -12,6 +12,7 @@ SELECT
     message_code,
     message_code_value,
     message_type,
+    safety_related_message,
     start_time,
     end_time,
     valid_until_further_notice

@@ -9,7 +9,6 @@ SELECT
     header,
     message_code,
     message_type,
-    safety_related_message,
     location_descriptor,
     coordinates,
     start_time,

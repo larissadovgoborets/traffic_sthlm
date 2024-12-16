@@ -10,9 +10,18 @@ SELECT
     message_code,
     message_type,
     location_descriptor,
-    coordinates,
+    longitude,
+    latitude,
     start_time,
-    end_time
+    end_time,
+    affected_direction,
+    number_of_lanes_restricted,
+    road_number,
+    road_number_numeric,
+    temporary_limit,
+    traffic_restriction_type,
+    road_name,
+    severity_text
 
 FROM 
     fct_traffic_msg 

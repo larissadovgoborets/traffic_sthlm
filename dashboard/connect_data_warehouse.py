@@ -22,3 +22,6 @@ def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messag
         df = pd.read_sql(query, conn)
 
         return df
+    
+if __name__ == "__main__":
+        print(query_traffic_messages())

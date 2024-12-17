@@ -24,4 +24,6 @@ def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messag
         return df
     
 if __name__ == "__main__":
-        print(query_traffic_messages())
+    print(query_traffic_messages())
+    df = query_traffic_messages()
+    print(df.info())

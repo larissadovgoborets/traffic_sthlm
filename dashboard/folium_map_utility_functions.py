@@ -116,7 +116,7 @@ def create_marker_tooltip(df) -> str:
 
 def get_deviation_icon_image_path(df) -> str:
     deviation = df['MESSAGE_CODE']
-    traffic_deviation_icons = {"Färja":"./map_icons/ferry.png",
+    traffic_deviation_icons = {"Färja":"./map_icons/ferry2.png",
                         "Vägarbete":"./map_icons/road_work.png",
                         "Vägen avstängd":"./map_icons/default_icon.png",
                         "Körfältsavstängningar":"./map_icons/road_work.png",
@@ -130,7 +130,10 @@ def get_deviation_icon_image_path(df) -> str:
                         "Trafiksignal fungerar ej":"./map_icons/default_icon.png",
                         "Olycka":"./map_icons/default_icon.png",
                         "Fordonshaveri":"./map_icons/default_icon.png"}
-    if deviation == "Hastighetsbegränsning gäller":
+    if deviation not in traffic_deviation_icons:
+         image_path = "./map_icons/default_icon.png"
+         
+    elif deviation == "Hastighetsbegränsning gäller":
             speed_limit = df['TEMPORARY_LIMIT']
             image_path = traffic_deviation_icons[deviation][speed_limit]
     else:

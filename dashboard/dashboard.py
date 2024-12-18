@@ -17,6 +17,13 @@ def layout():
     st.header("Traffic Stockholm")			
     map = folium.Map(location=STOCKHOLM_CENTER,zoom_start=9,)
     
+    car_selected = st.checkbox("Car")
+    metro_selected = st.checkbox("Metro")
+    bus_selected = st.checkbox("Bus")
+    ferry_selected = st.checkbox("Ferry")
+    tram_selected = st.checkbox("Tram")
+
+    
     # Loop over dataframe to place markers on the map for every Traffic deviation
     for index, row in df.iterrows():
         # Coordinates for traffic deviation
@@ -28,7 +35,7 @@ def layout():
         # Returns the image associated with the Traffic deviation
         image_path = get_deviation_icon_image_path(row)
         
-        #Creates a marker on the map
+        #Create a marker on the map
         folium.Marker(location,
                         icon=folium.CustomIcon(icon_image=image_path),
                         popup=folium.Popup(html_string,max_width=None)).add_to(map)

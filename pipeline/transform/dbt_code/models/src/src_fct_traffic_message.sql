@@ -4,6 +4,7 @@ WITH stg_traffic_messages AS (SELECT * FROM {{ source('traffic_data_sthlm_db', '
 SELECT 
     id,
     header,
+    message,
     message_code,
     message_code_value,
     message_type,

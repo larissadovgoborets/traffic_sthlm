@@ -7,6 +7,7 @@ src_deviation AS (SELECT * FROM {{ ref('dim_traffic_deviation_details') }})
 SELECT 
     id,
     header,
+    message,
     message_code,
     message_type,
     location_descriptor,

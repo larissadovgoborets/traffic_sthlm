@@ -16,14 +16,32 @@ def layout():
     
     st.header("Traffic Stockholm")			
     map = folium.Map(location=STOCKHOLM_CENTER,zoom_start=9,)
+    cols = st.columns([0.12, 0.88],vertical_alignment="top")
     
-    car_selected = st.checkbox("Car")
-    metro_selected = st.checkbox("Metro")
-    bus_selected = st.checkbox("Bus")
-    ferry_selected = st.checkbox("Ferry")
-    tram_selected = st.checkbox("Tram")
+    # Filter on means of transport
+    with cols[0]:
+        car_selected = st.checkbox("Car")
+        bus_selected = st.checkbox("Bus")
+        metro_selected = st.checkbox("Metro")
+        train_selected = st.checkbox("Train")
+        tram_selected = st.checkbox("Tram")
+        ferry_selected = st.checkbox("Ferry")
 
-    
+    # Filter dataframe on traffic deviations that are relevant to the means of transport
+    if car_selected or bus_selected:
+        car_traffic_deviation = ["Vägarbete","Hastighetsbegränsning gäller","Vägen avstängd","Fordonshaveri",
+                                 "Olycka","Följ omledningsskyltar","Körfältsavstängningar","Bärgning","Trafiksignal fungerar ej"]
+        df = df.query(f"MESSAGE_CODE in {car_traffic_deviation}")
+    if metro_selected:
+        pass
+    if train_selected:
+        pass
+    if tram_selected:
+        pass
+    if ferry_selected:
+        ferry_traffic_deviations = ["Färja"]
+        df = df.query(f"MESSAGE_CODE in {ferry_traffic_deviations}")
+
     # Loop over dataframe to place markers on the map for every Traffic deviation
     for index, row in df.iterrows():
         # Coordinates for traffic deviation
@@ -39,8 +57,8 @@ def layout():
         folium.Marker(location,
                         icon=folium.CustomIcon(icon_image=image_path),
                         popup=folium.Popup(html_string,max_width=None)).add_to(map)
-    
-    st_folium(map,use_container_width=True)
+    with cols[1]:
+        st_folium(map,height=450,use_container_width=True)
 
     
 

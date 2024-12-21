@@ -1,0 +1,43 @@
+
+Table fct_sl_announcement
+{
+  deviation_case_id integer [primary key]
+  created datetime
+  publish_from datetime
+  publish_aupto datetime
+  header string
+  message string
+  message_language string
+  scope_alias string
+  scope_line_key int [ref: > dim_scope_line.scope_line_id]
+  scope_stop_key int [ref: > dim_scope_stop.scope_stop_id]
+  priority_key int [ref: > dim_priority.priority_id]
+}
+
+Table dim_priority{
+  priority_id int [primary key]
+  AffectedDirection string
+  AffectedDirectionValue string
+  NumberOfLanesRestricted int
+  RoadNumber string
+  RoadNumberNumeric int
+  TrafficRestrictionType string
+} 
+
+Table dim_scope_stop{
+  scope_stop_id int [primary key]
+  stop_name string
+  stop_sname string
+  stop_area_name string
+  type string
+  latitude float
+  longitude float
+
+}
+
+Table dim_scope_line{
+  scope_line_id int [primary key]
+  transport_mode string
+  group_of_lines string
+  line_name string
+}

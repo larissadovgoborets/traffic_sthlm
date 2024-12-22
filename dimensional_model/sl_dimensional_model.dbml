@@ -4,7 +4,7 @@ Table fct_sl_announcement
   deviation_case_id integer [primary key]
   created datetime
   publish_from datetime
-  publish_aupto datetime
+  publish_upto datetime
   header string
   message string
   message_language string

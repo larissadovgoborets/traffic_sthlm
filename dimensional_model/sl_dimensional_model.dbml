@@ -1,4 +1,3 @@
-
 Table fct_sl_announcement
 {
   deviation_case_id integer [primary key]
@@ -7,26 +6,25 @@ Table fct_sl_announcement
   publish_upto datetime
   header string
   message string
-  message_language string
+  importance_level int
   scope_alias string
   scope_line_key int [ref: > dim_scope_line.scope_line_id]
-  scope_stop_key int [ref: > dim_scope_stop.scope_stop_id]
-  priority_key int [ref: > dim_priority.priority_id]
+  scope_stop_key int [ref: > dim_stop_area.stop_area_id]
+  scope_stop_point_key int [ref: > dim_stop_point.stop_point_id]
 }
 
-Table dim_priority{
-  priority_id int [primary key]
-  importance_level string
-  influence_level string
-  urgency_level string
-} 
-
-Table dim_scope_stop{
-  scope_stop_id int [primary key]
-  stop_name string
-  stop_sname string
+Table dim_stop_area{
+  stop_area_id int [primary key]
   stop_area_name string
   type string
+  latitude float
+  longitude float
+}
+
+Table dim_stop_point{
+  stop_point_id int [primary key]
+  stop_name string
+  stop_sname string  
   latitude float
   longitude float
 }

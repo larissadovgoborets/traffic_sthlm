@@ -29,7 +29,6 @@ Table dim_scope_stop{
   type string
   latitude float
   longitude float
-
 }
 
 Table dim_scope_line{

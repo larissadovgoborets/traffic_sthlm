@@ -8,8 +8,8 @@ SELECT
     type,
     lat,
     lon, 
-    stop_area__id,
-    stop_area__name
+    stop_area__id as stop_area_key,
+    stop_area__name as stop_area_name,
 
 
 FROM stg_sl_stop_point_detail

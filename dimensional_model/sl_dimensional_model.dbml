@@ -16,12 +16,9 @@ Table fct_sl_announcement
 
 Table dim_priority{
   priority_id int [primary key]
-  AffectedDirection string
-  AffectedDirectionValue string
-  NumberOfLanesRestricted int
-  RoadNumber string
-  RoadNumberNumeric int
-  TrafficRestrictionType string
+  importance_level string
+  influence_level string
+  urgency_level string
 } 
 
 Table dim_scope_stop{

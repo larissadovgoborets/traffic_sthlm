@@ -9,9 +9,11 @@ SELECT
     {{dbt_utils.generate_surrogate_key(['src_location.location_id','src_location.coordinates'])}} as location_id,
     {{dbt_utils.generate_surrogate_key(['src_deviation.deviation_id', 'src_deviation.affected_direction'])}} as deviation_id,
     COALESCE(header,'ej specificerad') AS header,
+    COALESCE(message,'Detaljerad informaion saknas') AS message,
     message_code,
     message_code_value,
     message_type,
+    safety_related_message,
     start_time,
     end_time,
     valid_until_further_notice

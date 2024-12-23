@@ -7,13 +7,22 @@ src_deviation AS (SELECT * FROM {{ ref('dim_traffic_deviation_details') }})
 SELECT 
     id,
     header,
+    message,
     message_code,
     message_type,
-    safety_related_message,
     location_descriptor,
-    coordinates,
+    longitude,
+    latitude,
     start_time,
-    end_time
+    end_time,
+    affected_direction,
+    number_of_lanes_restricted,
+    road_number,
+    road_number_numeric,
+    temporary_limit,
+    traffic_restriction_type,
+    road_name,
+    severity_text
 
 FROM 
     fct_traffic_msg 

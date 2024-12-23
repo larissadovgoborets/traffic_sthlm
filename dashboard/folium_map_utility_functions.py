@@ -65,6 +65,7 @@ def __build_html_string(df,start_date,end_date)-> str:
                 """
     elif deviation == "Hastighetsbegränsning gäller":
         html_content = f"""
+            <div style="width: 301px; box-sizing: border-box;">
                 <h4>{deviation}</h4>
                 <p><b>Plats:</b><br>
                 {df['ROAD_NUMBER']}
@@ -80,8 +81,9 @@ def __build_html_string(df,start_date,end_date)-> str:
                 {df['SEVERITY_TEXT']}
                 </p>
                 <pre>Giltlig från:       {start_date}<br>Beräknas pågå till: {end_date}</pre>
+            </div>
                 """
-    
+            
     elif deviation == 'Vägen avstängd' or deviation == 'Olycka' or deviation == 'Bärgning' or deviation == 'Fordonshaveri':
         html_content = f"""
                 <div style="width: 301px; box-sizing: border-box;">

@@ -2,7 +2,7 @@ from dagster import AssetExecutionContext
 from dagster_embedded_elt.dlt import DagsterDltResource, dlt_assets
 from dlt import pipeline
 from .load_trafikverket_data_pipeline import traffic_data_source
-from .sl_ann_pipe import sl_deviation_source
+from .sl_dlt_pipe import sl_announcements_source
 
 
 @dlt_assets(
@@ -20,10 +20,10 @@ def dagster_situation(context: AssetExecutionContext, dlt: DagsterDltResource) -
     yield from dlt.run(context=context)
 
 @dlt_assets(
-    dlt_source=sl_deviation_source(),
+    dlt_source=sl_announcements_source(),
 
     dlt_pipeline=pipeline(
-        pipeline_name="sl_deviation_pipe",
+        pipeline_name="sl_dlt_pipe",
         destination='snowflake',
         dataset_name="staging",
         progress="log"

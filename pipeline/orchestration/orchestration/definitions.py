@@ -9,7 +9,7 @@ all_assets_job = define_asset_job(name="all_assets_job")
 
 minute_schedule = ScheduleDefinition(
     name="minute_schedule",
-    cron_schedule="* * * * *",  # run every minute
+    cron_schedule="*/2 * * * *",  # run every minute
     job=all_assets_job,  
 )
 

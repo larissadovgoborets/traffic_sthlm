@@ -19,9 +19,7 @@ def display_sl_data():
     st.title("SL Trafikinformation")
 
     # Display the total number of deviations for each transport mode
-
     st.markdown("## Antal störningar just nu") 
-
 
     cols = st.columns(6)
 
@@ -57,7 +55,6 @@ def display_sl_data():
             label="Pendelbåt",
             value=df[df["TRANSPORT_MODE"] == "SHIP"]["TRANSPORT_MODE"].count(),
         )
-
 
     # Add a filter for the transport mode
     transport_modes = display_df['Transportmedel'].unique()

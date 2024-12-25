@@ -8,10 +8,10 @@ def display_sl_data():
     df = query_sl_announcements()
 
     # Choose the columns to display
-    display_df = df[['TRANSPORT_MODE', 'SCOPE_ALIAS', 'HEADER', 'MESSAGE','PUBLISH_UPTO']]
+    display_df = df[['TRANSPORT_MODE', 'LINE_KEY','SCOPE_ALIAS', 'HEADER', 'MESSAGE', 'STOP_POINT_NAME', 'PUBLISH_UPTO']]
 
     # Translate the column names to Swedish
-    display_df.columns = ['Transportmedel', 'Omfattning', 'Rubrik', 'Meddelande', 'Giltigt till']
+    display_df.columns = ['Transportmedel','Linje', 'Omfattning', 'Rubrik', 'Meddelande', 'Hållplats', 'Giltigt till']
 
     #Translate the transport modes to Swedish
     display_df['Transportmedel'] = display_df['Transportmedel'].replace({'BUS':'Buss', 'METRO':'Tunnelbana', 'TRAIN':'Pendeltåg', 'TRAM':'Spårvagn', 'SHIP':'Pendelbåt'})
@@ -66,9 +66,17 @@ def display_sl_data():
     # Filter data based on selected transport modes
     filtered_data = display_df[display_df['Transportmedel'].isin(selected_modes)]
 
+    # Add a search bar for a specific line
+    search_line = st.text_input('Sök efter linje:', '')
+
+    # Filter data based on the search line
+    if search_line:
+        filtered_data = filtered_data[filtered_data['Linje']== int(search_line)]
+
     # Display the dataframe based on the filter
     st.write("SL Announcements Data")
-    st.write(filtered_data)
+    filtered_data_display = filtered_data[['Transportmedel', 'Omfattning', 'Rubrik', 'Meddelande', 'Giltigt till']]
+    st.write(filtered_data_display)
 
 if __name__ == "__main__":
     display_sl_data()

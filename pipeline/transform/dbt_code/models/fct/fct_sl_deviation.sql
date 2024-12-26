@@ -34,4 +34,4 @@ LEFT JOIN
 LEFT JOIN 
     sl_line ON sl_deviation._dlt_id = sl_line._dlt_parent_id
 LEFT JOIN sl_stp_area ON sl_deviation._dlt_id = sl_stp_area._dlt_parent_id
-LEFT JOIN sl_stp_point ON sl_deviation._dlt_id = sl_stp_point._dlt_root_id
+LEFT JOIN sl_stp_point ON sl_stp_area._dlt_id = sl_stp_point._dlt_parent_id

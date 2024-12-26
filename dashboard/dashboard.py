@@ -25,36 +25,10 @@ def layout():
         unsafe_allow_html=True
         )
 
-    query = st.text_input("Sök på avvikelser")
+    query = st.text_input("Sök på väg")
     deviation = ["Vägarbete","Körfältsavstängningar","Olycka","Färja","Hastighetsbegränsning gäller"]
     selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=deviation)
-    col1, col2, col3 = st.columns(3)
-    count = df.duplicated(subset=['LONGITUDE', 'LATITUDE'], keep=False).sum()
-    with col1:
-        st.markdown(f"""
-            <div style="padding: 0px; background-color: #27272f; border-radius: 5px; text-align: center;">
-                <h5 style="color: #white;">Antal Störningar</h2>
-                <h5 style="color: #white;">{count}</h3>
-            </div>
-        """, unsafe_allow_html=True)
 
-
-    with col2:
-        st.markdown("""
-            <div style="padding: 0px; background-color: #27272f; border-radius: 10px; text-align: center;">
-                <h5 style="color: #white;">test2</h2>
-                <h5 style="color: #white;">0</h3>
-            </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown("""
-            <div style="padding: 0px; background-color: #27272f; border-radius: 10px; text-align: center;">
-                <h5 style="color: #white;">test3</h2>
-                <h5 style="color: #white;">0</h3>
-            </div>
-        """, unsafe_allow_html=True)
-    st.write("")
     deviation_map = folium.Map(location=STOCKHOLM_CENTER,zoom_start=9)   
     
     # Loop over dataframe to place markers on the map for every Traffic deviation

@@ -1,4 +1,4 @@
-WITH stg_sl_announcement AS (SELECT * FROM {{ source('traffic_data_sthlm_db', 'stg_sl_announcements') }}
+WITH stg_sl_deviation AS (SELECT * FROM {{ source('traffic_data_sthlm_db', 'stg_sl_deviations') }}
 )
 
 SELECT 
@@ -10,4 +10,4 @@ SELECT
     priority__importance_level as priority,
     _dlt_id
 
-FROM stg_sl_announcement
+FROM stg_sl_deviation

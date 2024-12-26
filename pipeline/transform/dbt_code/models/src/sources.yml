@@ -11,15 +11,15 @@ sources:
         - name: stg_trafikverket_deviation_schedule
           identifier: situation__deviation__schedule
 
-        - name: stg_sl_announcements
-          identifier: SL_ANNOUNCEMENTS
+        - name: stg_sl_deviations
+          identifier: SL_DEVIATIONS
         - name: stg_sl_messages
-          identifier: SL_ANNOUNCEMENTS__MESSAGE_VARIANTS
+          identifier: SL_DEVIATIONS__MESSAGE_VARIANTS
         - name: stg_sl_scope_lines
-          identifier: SL_ANNOUNCEMENTS__SCOPE__LINES
+          identifier: SL_DEVIATIONS__SCOPE__LINES
         - name: stg_sl_scope_stop_areas
-          identifier: SL_ANNOUNCEMENTS__SCOPE__STOP_AREAS
+          identifier: SL_DEVIATIONS__SCOPE__STOP_AREAS
         - name: stg_sl_scope_stop_points
-          identifier: SL_ANNOUNCEMENTS__SCOPE__STOP_AREAS__STOP_POINTS
+          identifier: SL_DEVIATIONS__SCOPE__STOP_AREAS__STOP_POINTS
         - name: stg_sl_stop_point_info
           identifier: SL_STOP_POINT_INFO

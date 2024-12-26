@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-@dlt.resource(write_disposition="replace", name="sl_announcements")
+@dlt.resource(write_disposition="replace", name="sl_deviations")
 def sl_deviations_resource():
     api_url = "https://deviations.integration.sl.se/v1/messages?future=true"
     response = requests.get(api_url)

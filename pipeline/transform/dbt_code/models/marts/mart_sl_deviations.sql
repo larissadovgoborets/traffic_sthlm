@@ -1,4 +1,4 @@
-WITH fct_sl AS (SELECT * FROM {{ ref('fct_sl_announcement') }}),
+WITH fct_sl AS (SELECT * FROM {{ ref('fct_sl_deviation') }}),
 
 dim_line AS (SELECT * FROM {{ ref('dim_sl_line') }}),
 

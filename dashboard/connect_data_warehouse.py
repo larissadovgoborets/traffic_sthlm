@@ -24,7 +24,7 @@ def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messag
 
         return df
 
-def query_sl_announcements(query="""SELECT * FROM mart_sl_announcements
+def query_sl_announcements(query="""SELECT * FROM MART_SL_DEVIATIONS
                            WHERE publish_upto > CURRENT_TIMESTAMP() 
                            ORDER BY priority DESC"""): # Order by priority to show the most important announcements first
 

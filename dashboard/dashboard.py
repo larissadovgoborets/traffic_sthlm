@@ -25,78 +25,18 @@ def layout():
         unsafe_allow_html=True
         )
 
-    query = st.text_input("Sök på avvikelser")
-    col1, col2, col3 = st.columns(3)
-
-    count = df.duplicated(subset=['LONGITUDE', 'LATITUDE'], keep=False).sum()
-    with col1:
-        st.markdown(f"""
-            <div style="padding: 0px; background-color: #27272f; border-radius: 5px; text-align: center;">
-                <h5 style="color: #white;">Antal Störningar</h2>
-                <h5 style="color: #white;">{count}</h3>
-            </div>
-        """, unsafe_allow_html=True)
-
-
-    with col2:
-        st.markdown("""
-            <div style="padding: 0px; background-color: #27272f; border-radius: 10px; text-align: center;">
-                <h5 style="color: #white;">test2</h2>
-                <h5 style="color: #white;">0</h3>
-            </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown("""
-            <div style="padding: 0px; background-color: #27272f; border-radius: 10px; text-align: center;">
-                <h5 style="color: #white;">test3</h2>
-                <h5 style="color: #white;">0</h3>
-            </div>
-        """, unsafe_allow_html=True)
-    st.write("")
-
-    cols = st.columns([0.13, 0.87],vertical_alignment="top")
+    query = st.text_input("Sök på väg")
+    deviation = ["Vägarbete","Körfältsavstängningar","Olycka","Färja","Hastighetsbegränsning gäller"]
+    selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=deviation)
+    filtered_df = df[df['MESSAGE_CODE'].isin(selected_modes)]
     
-    traffic_deviation_map = {
-        "Car": ["Vägarbete", "Hastighetsbegränsning gäller", "Vägen avstängd", "Fordonshaveri",
-                "Olycka", "Följ omledningsskyltar", "Körfältsavstängningar", "Bärgning", "Trafiksignal fungerar ej"],
-        "Bus": ["Vägarbete", "Vägen avstängd", "Fordonshaveri",
-                "Olycka", "Följ omledningsskyltar", "Körfältsavstängningar", "Bärgning", "Trafiksignal fungerar ej"],
-        "Metro": [],  
-        "Train": [],  
-        "Tram": [],  
-        "Ferry": ["Färja"]
-    }
-    selected_deviations = []
-    with cols[0]:
-        st.markdown("""
-            <div style="padding: 5px; background-color: #27272f; border-radius: 10px; text-align: center;">
-            <pre>Välj Färdmedel</pre>
-            </div>
-        """, unsafe_allow_html=True)
-        st.write("")
-        if st.checkbox("Car"):
-            selected_deviations.extend(traffic_deviation_map["Car"])
-        if st.checkbox("Bus"):
-            selected_deviations.extend(traffic_deviation_map["Bus"])
-        if st.checkbox("Metro"):
-            selected_deviations.extend(traffic_deviation_map["Metro"])
-        if st.checkbox("Train"):
-            selected_deviations.extend(traffic_deviation_map["Train"])
-        if st.checkbox("Tram"):
-            selected_deviations.extend(traffic_deviation_map["Tram"])
-        if st.checkbox("Ferry"):
-            selected_deviations.extend(traffic_deviation_map["Ferry"])
-   
-   
-    # filter dataframe for seleceted deviations
-    if selected_deviations:
-        df = df[df["MESSAGE_CODE"].isin(selected_deviations)]
+    if query:
+        filtered_df = filtered_df[df["LOCATION_DESCRIPTOR"].str.contains(rf'\b{query}\b', case=False, na=False) |
+                                  df["ROAD_NUMBER"].str.contains(rf'\b{query}\b', case=False, na=False)]
 
     deviation_map = folium.Map(location=STOCKHOLM_CENTER,zoom_start=9)   
-    
     # Loop over dataframe to place markers on the map for every Traffic deviation
-    for index, row in df.iterrows():
+    for index, row in filtered_df.iterrows():
         # Coordinates for traffic deviation
         location = row['LATITUDE'],row['LONGITUDE']
        
@@ -112,12 +52,11 @@ def layout():
                         popup=folium.Popup(html_string,max_width=None)).add_to(deviation_map)
        
     
-    with cols[1]:
-        #st_folium(deviation_map,height=450,use_container_width=True)
-        deviation_map = deviation_map._repr_html_()
-        html(deviation_map,height=600)
-
     
+    #st_folium(deviation_map,height=450,use_container_width=True)
+    deviation_map = deviation_map._repr_html_()
+    html(deviation_map,height=450)
+
 
 if __name__ == "__main__":
     layout()

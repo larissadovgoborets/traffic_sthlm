@@ -4,7 +4,6 @@ WITH stg_sl_scope_stop_point AS (SELECT * FROM {{ source('traffic_data_sthlm_db'
 SELECT 
     id,
     name,
-    _dlt_parent_id,
-    _dlt_root_id
+    _dlt_parent_id
 
 FROM stg_sl_scope_stop_point

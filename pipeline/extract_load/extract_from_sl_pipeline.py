@@ -3,32 +3,28 @@ from dlt.sources.helpers import requests
 import os
 from pathlib import Path
 
-def get_sl_announcements():
-    """load data from Sl's API"""
-    # Extract data from the API
+
+@dlt.resource(write_disposition="replace", name="sl_deviations")
+def sl_deviations_resource():
     api_url = "https://deviations.integration.sl.se/v1/messages?future=true"
     response = requests.get(api_url)
     response.raise_for_status()
-    return response.json()
-
-def get_station_point_info():
-    stop_points_url = 'https://transport.integration.sl.se/v1/stop-points'
-    stop_points = requests.get(stop_points_url).json()
-    return stop_points
-
-@dlt.resource(write_disposition="replace", name="sl_announcements")
-def sl_announcements_resource():
-    for announcement in get_sl_announcements():
-        yield announcement
+    deviations = response.json()
+    for deviation in deviations:
+        yield deviation
 
 @dlt.resource(write_disposition="replace", name = "sl_stop_point_info")
 def stop_point_info_resource():
-    for stop_point in get_station_point_info():
+    stop_points_url = 'https://transport.integration.sl.se/v1/stop-points'
+    response = requests.get(stop_points_url)
+    response.raise_for_status()
+    stop_points = response.json()
+    for stop_point in stop_points:
         yield stop_point
 
 @dlt.source
-def sl_announcements_with_coordinates():
-    return sl_announcements_resource(), stop_point_info_resource()
+def sl_deviations_with_coordinates():
+    return sl_deviations_resource(), stop_point_info_resource()
 
 def run_pipeline():
     # Create a pipeline to load data into Snowflake
@@ -38,7 +34,7 @@ def run_pipeline():
         dataset_name="staging")
     
     # Extract, normalize, and load the data
-    load_info = pipeline.run(sl_announcements_with_coordinates())
+    load_info = pipeline.run(sl_deviations_with_coordinates())
     print(load_info)  
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-WITH sl_ann AS (SELECT * FROM {{ ref('src_sl_announcement') }}),
+WITH sl_deviation AS (SELECT * FROM {{ ref('src_sl_deviation') }}),
 
 sl_msg AS (SELECT * FROM {{ ref('src_sl_message') }}),
 
@@ -13,8 +13,8 @@ sl_stp_detail AS (SELECT * FROM {{ ref('src_sl_stop_point_detail') }})
 
 SELECT 
 
-    {{dbt_utils.generate_surrogate_key(['sl_ann.deviation_case_id', 'sl_ann.version'])}} as announcement_id,
-    sl_ann.deviation_case_id as deviation_case_id,
+    {{dbt_utils.generate_surrogate_key(['sl_deviation.deviation_case_id', 'sl_deviation.version'])}} as deviation_id,
+    sl_deviation.deviation_case_id as deviation_case_id,
     version,
     created,
     publish_from,
@@ -28,10 +28,10 @@ SELECT
     sl_stp_point.id as stop_point_key
 
 FROM 
-    sl_ann
+    sl_deviation
 LEFT JOIN 
-    sl_msg ON sl_ann._dlt_id = sl_msg._dlt_parent_id
+    sl_msg ON sl_deviation._dlt_id = sl_msg._dlt_parent_id
 LEFT JOIN 
-    sl_line ON sl_ann._dlt_id = sl_line._dlt_parent_id
-LEFT JOIN sl_stp_area ON sl_ann._dlt_id = sl_stp_area._dlt_parent_id
-LEFT JOIN sl_stp_point ON sl_ann._dlt_id = sl_stp_point._dlt_root_id
+    sl_line ON sl_deviation._dlt_id = sl_line._dlt_parent_id
+LEFT JOIN sl_stp_area ON sl_deviation._dlt_id = sl_stp_area._dlt_parent_id
+LEFT JOIN sl_stp_point ON sl_stp_area._dlt_id = sl_stp_point._dlt_parent_id

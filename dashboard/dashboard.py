@@ -53,9 +53,9 @@ def layout():
        
     
     
-    st_folium(deviation_map,height=450,use_container_width=True)
-    #deviation_map = deviation_map._repr_html_()
-    #html(deviation_map,height=600)
+    #st_folium(deviation_map,height=450,use_container_width=True)
+    deviation_map = deviation_map._repr_html_()
+    html(deviation_map,height=450)
 
 
 if __name__ == "__main__":

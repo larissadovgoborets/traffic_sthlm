@@ -28,11 +28,12 @@ def layout():
     query = st.text_input("Sök på väg")
     deviation = ["Vägarbete","Körfältsavstängningar","Olycka","Färja","Hastighetsbegränsning gäller"]
     selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=deviation)
+    filtered_df = df[df['MESSAGE_CODE'].isin(selected_modes)]
+    
 
     deviation_map = folium.Map(location=STOCKHOLM_CENTER,zoom_start=9)   
-    
     # Loop over dataframe to place markers on the map for every Traffic deviation
-    for index, row in df.iterrows():
+    for index, row in filtered_df.iterrows():
         # Coordinates for traffic deviation
         location = row['LATITUDE'],row['LONGITUDE']
        

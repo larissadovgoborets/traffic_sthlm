@@ -16,7 +16,7 @@ from .sl_dlt_pipe import sl_announcements_source
     ),
     name="trafikverket",
 )
-def dagster_situation(context: AssetExecutionContext, dlt: DagsterDltResource) -> None:
+def dagster_situation(context: AssetExecutionContext, dlt: DagsterDltResource):
     yield from dlt.run(context=context)
 
 @dlt_assets(

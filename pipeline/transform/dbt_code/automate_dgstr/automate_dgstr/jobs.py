@@ -11,11 +11,11 @@ sl_dlt_job = define_asset_job(name="sl_dlt_job",
                                                                      "dlt_sl_deviations_source_sl_stop_point_info"))
 
 sl_dbt_job = define_asset_job(name="sl_dbt_job", 
-                                         selection=AssetSelection.keys("warehouse/fct_sl_deviation_dgstr", 
-                                                                       "warehouse/dim_sl_stop_point_dgstr",
-                                                                       "warehouse/dim_sl_line_dgstr",
-                                                                       "warehouse/dim_sl_stop_area_dgstr",
-                                                                       "marts/mart_sl_deviations_dgstr"))
+                                         selection=AssetSelection.keys("warehouse/fct_sl_deviation", 
+                                                                       "warehouse/dim_sl_stop_point",
+                                                                       "warehouse/dim_sl_line",
+                                                                       "warehouse/dim_sl_stop_area",
+                                                                       "marts/mart_sl_deviations"))
 
 
 trafikverket_dlt_job = define_asset_job(name="trafikverket_dlt_job", 

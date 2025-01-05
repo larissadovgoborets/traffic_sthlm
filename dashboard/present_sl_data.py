@@ -73,6 +73,11 @@ def display_sl_data():
     # Display the dataframe based on the filter
     st.write("SL Announcements Data")
     filtered_data_display = filtered_data[['Transportmedel', 'Omfattning', 'Rubrik', 'Meddelande', 'Giltigt till']]
+    
+    # Drop duplicates from the filtered data display (because of the station area and point joins)
+    filtered_data_display = filtered_data_display.drop_duplicates()
+
+    # Display the filtered data
     st.write(filtered_data_display)
 
 if __name__ == "__main__":

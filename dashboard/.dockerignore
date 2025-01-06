@@ -1,0 +1,4 @@
+# files to ignore
+.env
+run_dashboard.py
+dashboard_design.txt

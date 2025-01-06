@@ -8,6 +8,14 @@ docker build -t traffic_sthlm_dashboard .
 docker run --env-file .env -p 8056:8056 traffic_sthlm_dashboard
 ```
 
+You can also use following command to pull the latest image from docker hub and run it:
+
+```bash
+docker pull larissadovgoborets/traffic_sthlm_dashboard:latest
+
+docker run --env-file .env -p 8056:8056 larissadovgoborets/traffic_sthlm_dashboard:latest
+```
+
 [!NOTE] you need to have a .env file in the dashboard directory with the following content:
 
 ```bash

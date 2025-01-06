@@ -2,8 +2,6 @@ import folium.features
 import folium.map
 import streamlit as st
 import folium
-import pandas as pd
-from streamlit_folium import st_folium
 from connect_data_warehouse import query_traffic_messages
 from folium_map_utility_functions import create_marker_tooltip, get_deviation_icon_image_path
 from streamlit.components.v1 import html

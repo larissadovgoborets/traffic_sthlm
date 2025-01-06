@@ -2,8 +2,6 @@ import folium.features
 import folium.map
 import streamlit as st
 import folium
-import pandas as pd
-from streamlit_folium import st_folium
 from connect_data_warehouse import query_traffic_messages
 from folium_map_utility_functions import create_marker_tooltip, get_deviation_icon_image_path
 from streamlit.components.v1 import html
@@ -26,8 +24,10 @@ def layout():
         )
 
     query = st.text_input("Sök på väg")
-    deviation = ["Vägarbete","Körfältsavstängningar","Olycka","Färja","Hastighetsbegränsning gäller"]
-    selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=deviation)
+    default_deviation = ["Vägarbete","Körfältsavstängningar",
+                 "Olycka","Färja","Hastighetsbegränsning gäller",
+                 "Fordonshaveri","Bärgning","Vägen avstängd"]
+    selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=default_deviation)
     filtered_df = df[df['MESSAGE_CODE'].isin(selected_modes)]
     
     if query:
@@ -39,7 +39,7 @@ def layout():
     for index, row in filtered_df.iterrows():
         # Coordinates for traffic deviation
         location = row['LATITUDE'],row['LONGITUDE']
-       
+        
         # Returns HTML code for marker tooltip
         html_string = create_marker_tooltip(row)
         
@@ -52,8 +52,6 @@ def layout():
                         popup=folium.Popup(html_string,max_width=None)).add_to(deviation_map)
        
     
-    
-    #st_folium(deviation_map,height=450,use_container_width=True)
     deviation_map = deviation_map._repr_html_()
     html(deviation_map,height=450)
 

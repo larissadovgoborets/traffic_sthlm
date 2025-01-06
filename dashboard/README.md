@@ -30,4 +30,4 @@ SNOWFLAKE_ROLE=<snowflake_role>
 
 Be sure not to have any spaces in the .env file.
 
-The dashboard will be available at http://localhost:8056.
+The dashboard will be available at ```http://localhost:8056```.

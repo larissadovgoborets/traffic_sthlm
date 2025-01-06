@@ -1,8 +1,8 @@
-WITH fct_traffic_msg AS (SELECT * FROM {{ ref('fct_traffic_messages') }}),
+WITH fct_traffic_msg AS (SELECT * FROM {{ ref('fct_traffic_messages_dgstr') }}),
 
-src_location AS (SELECT * FROM {{ ref('dim_location') }}),
+src_location AS (SELECT * FROM {{ ref('dim_location_dgstr') }}),
 
-src_deviation AS (SELECT * FROM {{ ref('dim_traffic_deviation_details') }})
+src_deviation AS (SELECT * FROM {{ ref('dim_traffic_deviation_details_dgstr') }})
 
 SELECT 
     id,

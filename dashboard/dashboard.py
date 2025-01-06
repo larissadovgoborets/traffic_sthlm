@@ -39,7 +39,7 @@ def layout():
     for index, row in filtered_df.iterrows():
         # Coordinates for traffic deviation
         location = row['LATITUDE'],row['LONGITUDE']
-       
+        
         # Returns HTML code for marker tooltip
         html_string = create_marker_tooltip(row)
         
@@ -52,8 +52,6 @@ def layout():
                         popup=folium.Popup(html_string,max_width=None)).add_to(deviation_map)
        
     
-    
-    #st_folium(deviation_map,height=450,use_container_width=True)
     deviation_map = deviation_map._repr_html_()
     html(deviation_map,height=450)
 

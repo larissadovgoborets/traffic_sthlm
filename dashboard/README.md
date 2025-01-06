@@ -16,8 +16,9 @@ docker pull larissadovgoborets/traffic_sthlm_dashboard:latest
 docker run --env-file .env -p 8056:8056 larissadovgoborets/traffic_sthlm_dashboard:latest
 ```
 
-[!NOTE] you need to have a .env file in the dashboard directory with the following content:
-
+> [!NOTE]
+> you need to have a .env file in the dashboard directory with the following content:
+>
 ```bash
 SNOWFLAKE_DATABASE=<snowflake_database>
 SNOWFLAKE_ACCOUNT=<snowflake_account>
@@ -28,6 +29,7 @@ SNOWFLAKE_SCHEMA=<snowflake_schema>
 SNOWFLAKE_ROLE=<snowflake_role>
 ```
 
-Be sure not to have any spaces in the .env file.
+> Be sure not to have any spaces in the .env file.
+> Alternatively, you can set the environment variables directly in the terminal before running the docker command.
 
 The dashboard will be available at ```http://localhost:8056```.

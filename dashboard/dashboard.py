@@ -46,7 +46,7 @@ def layout():
         
         #Create a marker on the map
         folium.Marker(location,
-                        icon=folium.CustomIcon(icon_image=image_path),
+                        icon=folium.CustomIcon(icon_image=image_path, icon_size=(30,30)),
                         popup=folium.Popup(html_string,max_width=None)).add_to(deviation_map)
        
     

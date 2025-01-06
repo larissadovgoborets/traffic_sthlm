@@ -24,8 +24,10 @@ def layout():
         )
 
     query = st.text_input("Sök på väg")
-    deviation = ["Vägarbete","Körfältsavstängningar","Olycka","Färja","Hastighetsbegränsning gäller"]
-    selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=deviation)
+    default_deviation = ["Vägarbete","Körfältsavstängningar",
+                 "Olycka","Färja","Hastighetsbegränsning gäller",
+                 "Fordonshaveri","Bärgning","Vägen avstängd"]
+    selected_modes = st.multiselect('Välj avvikelse', df["MESSAGE_CODE"].unique(), default=default_deviation)
     filtered_df = df[df['MESSAGE_CODE'].isin(selected_modes)]
     
     if query:

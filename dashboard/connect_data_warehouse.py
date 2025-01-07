@@ -4,7 +4,7 @@ import snowflake.connector
 import pandas as pd 
 import streamlit as st
 
-@st.cache_data
+@st.cache_data(ttl=60)
 def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messages_dgstr'):
 
     load_dotenv()
@@ -24,6 +24,7 @@ def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messag
 
         return df
 
+@st.cache_data(ttl=60)
 def query_sl_announcements(query="""SELECT * FROM MART_SL_DEVIATIONS
                            WHERE publish_upto > CURRENT_TIMESTAMP() 
                            ORDER BY priority DESC"""): # Order by priority to show the most important announcements first

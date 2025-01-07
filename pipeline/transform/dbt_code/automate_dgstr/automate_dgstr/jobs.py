@@ -22,10 +22,10 @@ trafikverket_dlt_job = define_asset_job(name="trafikverket_dlt_job",
                                                  selection=AssetSelection.keys("dlt_traffic_data_source_traffic_data_resource"))
 
 trafikverket_dbt_job = define_asset_job(name="trafikverket_dbt_job",
-                                             selection=AssetSelection.keys("warehouse/fct_traffic_messages_dgstr",
-                                                                            "warehouse/dim_traffic_deviation_details_dgstr",
-                                                                            "warehouse/dim_location_dgstr",
-                                                                            "marts/mart_trafikverket_traffic_messages_dgstr"))
+                                             selection=AssetSelection.keys("warehouse/fct_traffic_messages",
+                                                                            "warehouse/dim_traffic_deviation_details",
+                                                                            "warehouse/dim_location",
+                                                                            "marts/mart_trafikverket_traffic_messages"))
 
 
 

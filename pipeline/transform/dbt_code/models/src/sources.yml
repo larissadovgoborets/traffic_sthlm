@@ -8,8 +8,6 @@ sources:
           identifier: situation__deviation
         - name: stg_trafikverket_county_no
           identifier: situation__deviation__county_no
-        - name: stg_trafikverket_deviation_schedule
-          identifier: situation__deviation__schedule
 
         - name: stg_sl_deviations
           identifier: SL_DEVIATIONS

@@ -121,7 +121,8 @@ def get_deviation_icon_image_path(df) -> str:
                         "Vägarbete":"./map_icons/road_work.png",
                         "Vägen avstängd":"./map_icons/default_icon.png",
                         "Körfältsavstängningar":"./map_icons/road_work.png",
-                        "Hastighetsbegränsning gäller":{"Hastighet: 50km/h":"./map_icons/speed_limit_50.png",
+                        "Hastighetsbegränsning gäller":{"Hastighet: 70km/h":"./map_icons/speed_limit_70.png",
+                                                        "Hastighet: 50km/h":"./map_icons/speed_limit_50.png",
                                                         "Hastighet: 40km/h":"./map_icons/speed_limit_40.png",
                                                         "Hastighet: 30km/h":"./map_icons/speed_limit_30.png"},
                         "Vägren":"./map_icons/default_icon.png",
@@ -136,6 +137,8 @@ def get_deviation_icon_image_path(df) -> str:
          
     elif deviation == "Hastighetsbegränsning gäller":
             speed_limit = df['TEMPORARY_LIMIT']
+            if speed_limit not in traffic_deviation_icons[deviation]:
+                image_path = "./map_icons/default_icon.png"
             image_path = traffic_deviation_icons[deviation][speed_limit]
     else:
             image_path = traffic_deviation_icons[deviation]

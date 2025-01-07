@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 @st.cache_data(ttl=60)
-def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messages_dgstr'):
+def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messages'):
 
     load_dotenv()
 

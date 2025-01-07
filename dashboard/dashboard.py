@@ -6,8 +6,6 @@ from connect_data_warehouse import query_traffic_messages
 from folium_map_utility_functions import create_marker_tooltip, get_deviation_icon_image_path
 from streamlit.components.v1 import html
 from present_sl_data import display_sl_data
-import pandas as pd
-from datetime import datetime
 STOCKHOLM_CENTER = (59.325,18.05)
 
 def layout():

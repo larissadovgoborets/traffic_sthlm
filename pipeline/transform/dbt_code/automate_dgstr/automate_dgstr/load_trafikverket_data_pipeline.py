@@ -18,7 +18,7 @@ def _get_traffic_data():
     response.raise_for_status()  # check for http errors
     return json.loads(response.content.decode('utf8'))
 
-@dlt.resource(write_disposition="replace", table_name="Situation_test")
+@dlt.resource(write_disposition="replace", table_name="Situation")
 def traffic_data_resource():
     response = _get_traffic_data()['RESPONSE']['RESULT'][0]['Situation']
     for data in response:

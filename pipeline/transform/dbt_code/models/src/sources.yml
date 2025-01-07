@@ -3,11 +3,11 @@ sources:
       schema: staging
       tables: 
         - name: stg_trafikverket_traffic_messages
-          identifier: situation_test
+          identifier: situation
         - name: stg_trafikverket_deviation
-          identifier: situation_test__deviation
+          identifier: situation__deviation
         - name: stg_trafikverket_county_no
-          identifier: situation_test__deviation__county_no
+          identifier: situation__deviation__county_no
 
         - name: stg_sl_deviations
           identifier: SL_DEVIATIONS

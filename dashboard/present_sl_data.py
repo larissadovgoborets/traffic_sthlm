@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
-from connect_data_warehouse import query_sl_announcements
+from connect_data_warehouse import query_sl_deviations
 
 def display_sl_data():
     
-    # Fetch SL announcements data
-    df = query_sl_announcements()
+    # Fetch SL deviations data
+    df = query_sl_deviations()
 
     # Choose the columns to display
     display_df = df[['TRANSPORT_MODE', 'LINE_KEY','SCOPE_ALIAS', 'HEADER', 'MESSAGE', 'STOP_POINT_NAME', 'PUBLISH_UPTO']]
@@ -71,7 +71,7 @@ def display_sl_data():
         filtered_data = filtered_data[filtered_data['Linje']== int(search_line)]
 
     # Display the dataframe based on the filter
-    st.write("SL Announcements Data")
+    st.write("SL Deviations Data")
     filtered_data_display = filtered_data[['Transportmedel', 'Omfattning', 'Rubrik', 'Meddelande', 'Giltigt till']]
     
     # Drop duplicates from the filtered data display (because of the station area and point joins)

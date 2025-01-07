@@ -25,7 +25,7 @@ def query_traffic_messages(query='SELECT * FROM mart_trafikverket_traffic_messag
         return df
 
 @st.cache_data(ttl=60)
-def query_sl_announcements(query="""SELECT * FROM MART_SL_DEVIATIONS
+def query_sl_deviations(query="""SELECT * FROM MART_SL_DEVIATIONS
                            WHERE publish_upto > CURRENT_TIMESTAMP() 
                            ORDER BY priority DESC"""): # Order by priority to show the most important announcements first
 
@@ -50,5 +50,5 @@ if __name__ == "__main__":
     print(query_traffic_messages())
     df = query_traffic_messages()
     print(df.info())
-    sl_df = query_sl_announcements()
+    sl_df = query_sl_deviations()
     print(sl_df.head())

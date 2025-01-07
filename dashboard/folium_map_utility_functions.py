@@ -137,6 +137,8 @@ def get_deviation_icon_image_path(df) -> str:
          
     elif deviation == "Hastighetsbegränsning gäller":
             speed_limit = df['TEMPORARY_LIMIT']
+            if speed_limit not in traffic_deviation_icons[deviation]:
+                image_path = "./map_icons/default_icon.png"
             image_path = traffic_deviation_icons[deviation][speed_limit]
     else:
             image_path = traffic_deviation_icons[deviation]
